@@ -1,5 +1,5 @@
 prog = $(CROSS_COMPILE)gcc
-compflags = -c -O2 -Wall 
+compflags = -c -O2 -Wall -DNO_CONFIG_H -DHAVE_LIBINTL
 linkflags = -lm
 debugflag =
 

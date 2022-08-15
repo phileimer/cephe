@@ -4,12 +4,14 @@
 #include <stdio.h>
 
 #include "include.h"
-#include <locale.h>
 
-//#ifndef NO_CONFIGURE
-//	#include "../config.h"
-//#endif
+#ifndef NO_CONFIG_H
+	#include "config.h"
+#endif
 
+#ifdef HAVE_LIBINTL
+	#include <locale.h>
+#endif // HAVE_LIBINTL
 
 
 int	main(int argc,char* argv[])
@@ -17,9 +19,11 @@ int	main(int argc,char* argv[])
 	Ephemerides	E;
 
 
+#ifdef HAVE_LIBINTL
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+#endif // HAVE_LIBINTL
 
 	if(argc > 1)
 		wprintf(L" %S %S - %S\n", PACKAGE, VERSION, L"Jean Philippe EIMER (phil.eimer@9online.fr)");

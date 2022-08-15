@@ -129,8 +129,12 @@ double	ObservateurInitTempsSyst(Observateur *Obs)
 	tmtl = gmtime(&timet);
 	Obs->Inst.tmtu = *tmtl;
 
+#ifdef HAVE_STRUCT_TM_GMTOFF
 	Obs->zone = Obs->Inst.tmlocal.tm_gmtoff;
-
+#else
+	Obs->zone = 0;
+#endif	// HAVE_STRUCT_TM_GMTOFF
+		//
 	InstantInit(&Obs->Inst, Obs->longitude, Obs->zone, TPSLOC);
 
 	return(Obs->Inst.tu);

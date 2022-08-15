@@ -13,7 +13,9 @@
 #define	__USE_UNIX98
 //#define	__USE_ISOC99
 #include <wchar.h>
-#include <libintl.h>
+#ifdef	HAVE_LIBINTL
+	#include <libintl.h>
+#endif	// HAVE_LIBINTL
 //#define _(String) gettext(String)
 #define _(String) String
 
