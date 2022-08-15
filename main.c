@@ -10,7 +10,7 @@
 #endif
 
 #ifdef HAVE_LIBINTL
-	#include <locale.h>
+	#include <libintl.h>
 #endif // HAVE_LIBINTL
 
 
