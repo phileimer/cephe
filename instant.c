@@ -12,7 +12,7 @@ double	InstantInit(Instant *inst, double longitude, long zone, unsigned char btu
 	double	dj;
 
 
-	if (btu == TPSTU)
+	if( btu == TPSTU )
 	{
 		dj = InstantJulien(&inst->tmtu, NULL);
 		dj += (double)zone / 86400.0;
@@ -35,7 +35,7 @@ double	InstantInit(Instant *inst, double longitude, long zone, unsigned char btu
 
 double	Instant_tu2t(Instant *inst, const Instant *Idate,double tuext, long zone)
 {
-	if(tuext == TUSING)
+	if( tuext == TUSING )
 	{
 		inst->tmtu.tm_mday=0;
 		inst->tmtu.tm_mon=0;
@@ -85,7 +85,7 @@ double	InstantJulien(const struct tm *tmt, double *phdec)
 	unsigned short int	m1=m+1;
 
 
-	if(m<3)
+	if( m<3 )
 	{
 		a1--;
 		m1+=12;
@@ -118,7 +118,7 @@ double	InstantInvJulien(struct tm *tmt, double dj)
 	a=(long int)floor(dj+0.5);
 
 
-	if(a>2299160)
+	if( a>2299160 )
 	{
 		int f=(int)(((double)a-1867216.25)/36524.25);
 		a+=1+f-f/4;
@@ -147,7 +147,7 @@ double	InstantInvJulien(struct tm *tmt, double dj)
 
 void	InstantDiffHeure(Instant *inst, unsigned char tudefined, long int zone)
 {
-	if(!tudefined)
+	if( !tudefined )
 	{
 		InstantInvJulien(&inst->tmtu, InstantJulien(&inst->tmlocal, NULL)-zone/86400.0);
 		inst->tmtu.tm_sec = inst->tmlocal.tm_sec;	// conservation des secondes

@@ -36,7 +36,7 @@ unsigned char	ObservateurChargeLieu(Observateur *Obs)
 	unsigned char	ret = FALSE;
 
 
-    if (!(home = getenv("HOME")) || strlen(home) >= LINE_LENGTH)
+    if( !(home = getenv("HOME")) || strlen(home) >= LINE_LENGTH )
 		strcpy(filename, ".");
 	else
 		strcpy(filename, home);
@@ -59,7 +59,7 @@ unsigned char	ObservateurChargeLieu(Observateur *Obs)
 //			fwscanf(file, L"%S\n", &line);
 //			wprintf(line);
 		}
-		while(*line == L'#');
+		while( *line == L'#' );
 
 		unsigned char	index2 = wcscspn(line, L"\t");
 		wcsncpy(Obs->nom, line, (index2 > 15 ? 16 : index2));
@@ -129,12 +129,10 @@ double	ObservateurInitTempsSyst(Observateur *Obs)
 	tmtl = gmtime(&timet);
 	Obs->Inst.tmtu = *tmtl;
 
-#ifdef HAVE_STRUCT_TM_GMTOFF
+#ifndef _WIN32
 	Obs->zone = Obs->Inst.tmlocal.tm_gmtoff;
-#else
-	Obs->zone = 0;
-#endif	// HAVE_STRUCT_TM_GMTOFF
-		//
+#endif	// _WIN32
+
 	InstantInit(&Obs->Inst, Obs->longitude, Obs->zone, TPSLOC);
 
 	return(Obs->Inst.tu);
